@@ -5,7 +5,7 @@ R = 100; %some constant to be determined later, for now 100 seems to be fine
 
 %test case
 Players = ["Player1", "Player2", "Player3", "Player4", "Player5"];
-prob = [0.4, 0.55, 0.5, 0.45, 0.6]; %still in process of obtaining data, these are just test values
+prob = [0.44, 0.55, 0.5, 0.45, 0.6]; %still in process of obtaining data, these are just test values
 Odds = [2.5, 3.0, 2.0, 4.0, 1.8];  %still in process of obtaining data, these are just test values
 
 %Will implement user input to choose players, we will dislay players and
@@ -24,15 +24,17 @@ while(N < 5 & ask)
 
     fprintf("Enter the number next to the player you would like to bet on.\n")
     if(N>=1)
-        fprintf("If you are done, type -999\n")
+        fprintf("If you are done, type 0\n")
     end
     userInput = input("Enter Number: ");
     
-    if(userInput == -999)
+    if(userInput == 0)
         ask = false;
         %account for repeats also
     elseif(ismember(userInput, bets))
         fprintf("Already entered this bet. Enter in a bet not already chosen\n")
+    elseif(userInput > length(Players) || userInput < 0)
+        fprintf("Input out of range. Try again.\n")
     else
         bets = [bets userInput]
         p = [p prob(userInput)]
