@@ -60,6 +60,13 @@ sum(x) <= 1000;
 x >= 0;
 cvx_end
 
+fprintf("Bet made on each player:\n")
+for i = 1:N
+    fprintf("%d. %s: $%.2f\n", i, Players{bets(i)}, x(i))
+end
+
+fprintf("Expected Profit: $%.2f\n",cvx_optval)
+
 y_bets = y(bets);
 Payout = 0;
 MoneyLoss = 0;
