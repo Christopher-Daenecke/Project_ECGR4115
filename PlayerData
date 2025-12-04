@@ -1,0 +1,170 @@
+%11/30
+players(1).name = "Shai Gilgeous-Alexander";
+players(1).line = 31.5;
+players(1).odds_over = -124;
+players(1).odds_under = -103;
+players(1).actualscore = 26;
+
+players(2).name = "Ace Bailey";
+players(2).line = 11.5;
+players(2).odds_over = -112;
+players(2).odds_under = -113;
+players(2).actualscore = 19;
+
+players(3).name = "Kevin Durant";
+players(3).line = 25.5;
+players(3).odds_over = -104;
+players(3).odds_under = -120;
+players(3).actualscore = 32;
+
+players(4).name = "Karl-Anthony Towns";
+players(4).line = 22.5;
+players(4).odds_over = -109;
+players(4).odds_under = -117;
+players(4).actualscore = 29;
+
+players(5).name = "Luka Doncic";
+players(5).line = 34.5;
+players(5).odds_over = -105;
+players(5).odds_under = -121;
+players(5).actualscore = 34;
+
+% 11/28 
+players(6).name = "Shai Gilgeous-Alexander";
+players(6).line = 31.5;
+players(6).odds_over = -103;
+players(6).odds_under = -123;
+players(6).actualscore = 37;
+
+players(7).name = "Luka Doncic";
+players(7).line = 33.5;
+players(7).odds_over = -119;
+players(7).odds_under = -108;
+players(7).actualscore = 35;
+
+players(8).name = "LaMelo Ball";
+players(8).line = 19.5;
+players(8).odds_over = -124;
+players(8).odds_under = -103;
+players(8).actualscore = 16;
+
+players(9).name = "Karl-Anthony Towns";
+players(9).line = 23.5;
+players(9).odds_over = -115;
+players(9).odds_under = -111;
+players(9).actualscore = 9;
+
+players(10).name = "De'Aaron Fox";
+players(10).line = 24.5;
+players(10).odds_over = -117;
+players(10).odds_under = -109;
+players(10).actualscore = 15;
+
+%11/26
+players(11).name = "Shai Gilgeous-Alexander";
+players(11).line = 31.5;
+players(11).odds_over = -112;
+players(11).odds_under = -114;
+players(11).actualscore = 40;
+
+players(12).name = "Karl-Anthony Towns";
+players(12).line = 24.5;
+players(12).odds_over = -122;
+players(12).odds_under = -104;
+players(12).actualscore = 19;
+
+players(13).name = "Zach Edey";
+players(13).line = 12.5;
+players(13).odds_over = -127;
+players(13).odds_under = 100;
+players(13).actualscore = 32;
+
+players(14).name = "Jaime Jaquez";
+players(14).line = 11.5;
+players(14).odds_over = -130;
+players(14).odds_under = 100;
+players(14).actualscore = 10;
+
+players(15).name = "Scottie Barnes";
+players(15).line = 19.5;
+players(15).odds_over = -121;
+players(15).odds_under = -105;
+players(15).actualscore = 24;
+
+%functions
+function DecimalOdds = amer2dec(american)
+    if american > 0
+        DecimalOdds = 1 + american/100;
+    else
+        DecimalOdds = 1 + 100/abs(american);
+    end
+end
+
+function probability = amer2prob(american)
+    if american > 0
+        probability = 100 / (american + 100);
+    else
+        probability = abs(american) / (abs(american) + 100);
+    end
+end
+
+%ask for date
+fprintf("1.11/30\n 2.11/28\n 3.11/26\n");
+date_choice = input("(1-3): ");
+
+switch date_choice
+    case 1
+        idx = 1:5;
+    case 2
+        idx = 6:10;
+    case 3
+        idx = 11:15;
+    otherwise
+        error("Error");
+end
+
+%make vectors
+Players = strings(1,5);
+Odds = zeros(1,5);
+prob = zeros(1,5);
+
+for i = 1:5
+    p = players(idx(i));
+    fprintf("%s", p.name);
+    choice = input("\n 1.Over \n 2.Under \n (1-2):");
+    Players(i) = p.name;
+    if choice == 1
+        Odds(i) = amer2dec(p.odds_over);
+        prob(i) = amer2prob(p.odds_over);
+    elseif choice == 2
+        Odds(i) = amer2dec(p.odds_under);
+        prob(i) = amer2prob(p.odds_under);
+    else
+        error("Error");
+    end
+end
+
+Players
+Odds
+prob
+
+%what was won
+Results = strings(1,5);
+for i = 1:5
+    p = players(idx(i));
+    if prob(i) == amer2prob(p.odds_over)%over
+        if p.actualscore > p.line
+            Results(i) = "won";
+        else
+            Results(i) = "loss";
+        end
+    else      %under
+        if p.actualscore < p.line
+            Results(i) = "won";
+        else
+            Results(i) = "loss";
+        end
+    end
+end
+y = Results;
+save playerVectors.mat Players Odds prob y 
