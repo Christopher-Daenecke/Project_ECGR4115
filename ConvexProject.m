@@ -1,4 +1,3 @@
-%% 
 %Names: Christopher Daenecke and Enrique Ramirez
 
 R = 100; %some constant to be determined later, for now 100 seems to be fine
@@ -83,3 +82,4 @@ TotalMoneySpent = sum(x)
 Payout
 MoneyLoss
 Profit = Payout - sum(x)
+
