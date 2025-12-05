@@ -2,7 +2,6 @@
 
 R = 100; %some constant to be determined later, for now 100 seems to be fine
 
-%test case
 load playerVectors.mat   % loads Players, Odds, prob
 
 %Will implement user input to choose players, we will dislay players and
@@ -87,3 +86,4 @@ fprintf("\nTotal Money Bet = $%.2f\n", TotalMoneyBet)
 fprintf("Actual Payout = $%.2f\n", Payout)
 fprintf("Actual Money Loss = $%.2f\n", MoneyLoss)
 fprintf("Actual Profit = $%.2f\n", Profit)
+
