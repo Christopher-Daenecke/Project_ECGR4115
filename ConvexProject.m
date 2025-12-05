@@ -78,8 +78,12 @@ for i = 1:length(x)
     end
 end
 
-TotalMoneySpent = sum(x)
-Payout
-MoneyLoss
-Profit = Payout - sum(x)
+TotalMoneyBet = sum(x);
+Payout;
+MoneyLoss;
+Profit = Payout - sum(x);
 
+fprintf("\nTotal Money Bet = $%.2f\n", TotalMoneyBet)
+fprintf("Actual Payout = $%.2f\n", Payout)
+fprintf("Actual Money Loss = $%.2f\n", MoneyLoss)
+fprintf("Actual Profit = $%.2f\n", Profit)
